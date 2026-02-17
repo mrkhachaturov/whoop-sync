@@ -8,9 +8,6 @@
 - `whoopskill_v2` (TypeScript CLI, trends/insights, color output)
 - `whoop-health-analysis-1.1.0` (Python skill, retry logic, `--days` shorthand, summary averages, HTML charts)
 
-Both reference projects live at `/Volumes/storage/01_Projects/whoop/` alongside this project.
-The official WHOOP OpenAPI v2 spec is at `/Volumes/storage/01_Projects/whoop/openapi.json`.
-
 ---
 
 ## Architecture

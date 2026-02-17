@@ -7,6 +7,7 @@ node_modules/
 # Environment — contains OAuth client credentials
 .env
 .env.*
+!.env.example
 
 # Auth tokens — stored at ~/.whoop-sync/tokens.json but gitignore any local copies
 tokens.json
@@ -23,3 +24,9 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Claude Code local config
+.claude/
+
+# Implementation plans (private working notes)
+docs/plans/
