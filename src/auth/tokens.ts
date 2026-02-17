@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import type { TokenData, OAuthTokenResponse } from '../types/whoop.js';
 import { WhoopError, ExitCode } from '../utils/errors.js';
 
-const CONFIG_DIR = join(homedir(), '.whoop-up');
+const CONFIG_DIR = process.env.WHOOP_TOKEN_DIR ?? join(homedir(), '.whoop-up');
 const TOKEN_FILE = join(CONFIG_DIR, 'tokens.json');
 
 // Refresh tokens 15 minutes before expiry to avoid race conditions
