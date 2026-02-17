@@ -1,20 +1,20 @@
-# whoop-sync
+# whoop-up
 
-[![npm version](https://img.shields.io/npm/v/whoop-sync.svg)](https://www.npmjs.com/package/whoop-sync)
+[![npm version](https://img.shields.io/npm/v/whoop-up.svg)](https://www.npmjs.com/package/whoop-up)
 
 CLI for WHOOP health data — fetch, analyze, and visualize via the WHOOP API v2.
 
 ```bash
-npm install -g whoop-sync
+npm install -g whoop-up
 ```
 
 ## Quick start
 
 ```bash
-whoop-sync auth login                                 # authenticate via browser
-whoop-sync summary --color                            # color-coded daily snapshot
-whoop-sync dashboard                                  # full dashboard + 7-day trends
-whoop-sync chart dashboard -n 30 -o /tmp/whoop.html  # interactive HTML chart
+whoop auth login                                 # authenticate via browser
+whoop summary --color                            # color-coded daily snapshot
+whoop dashboard                                  # full dashboard + 7-day trends
+whoop chart dashboard -n 30 -o /tmp/whoop.html  # interactive HTML chart
 ```
 
 ## Setup
@@ -33,10 +33,10 @@ WHOOP_REDIRECT_URI=https://your-redirect-uri.com/callback
 3. Authenticate:
 
 ```bash
-whoop-sync auth login
+whoop auth login
 ```
 
-Tokens are stored at `~/.whoop-sync/tokens.json` and auto-refresh 15 minutes before expiry.
+Tokens are stored at `~/.whoop-up/tokens.json` and auto-refresh 15 minutes before expiry.
 
 ## Commands
 
@@ -44,10 +44,10 @@ Tokens are stored at `~/.whoop-sync/tokens.json` and auto-refresh 15 minutes bef
 
 | Command | Description |
 | --- | --- |
-| `whoop-sync auth login` | OAuth flow — opens browser, paste callback URL |
-| `whoop-sync auth logout` | Revoke access on WHOOP server + clear local tokens |
-| `whoop-sync auth status` | Show token expiry (does not refresh) |
-| `whoop-sync auth refresh` | Force refresh access token using refresh token |
+| `whoop auth login` | OAuth flow — opens browser, paste callback URL |
+| `whoop auth logout` | Revoke access on WHOOP server + clear local tokens |
+| `whoop auth status` | Show token expiry (does not refresh) |
+| `whoop auth refresh` | Force refresh access token using refresh token |
 
 ### Data
 
@@ -55,12 +55,12 @@ Output is JSON by default. Add `--pretty` for human-readable formatted output.
 
 | Command | Description |
 | --- | --- |
-| `whoop-sync sleep` | Sleep stages, efficiency, respiratory rate |
-| `whoop-sync recovery` | Recovery score, HRV, RHR, SpO2, skin temperature |
-| `whoop-sync workout` | Workouts with strain, HR zones, calories |
-| `whoop-sync cycle` | Daily physiological cycle (strain, calories) |
-| `whoop-sync profile` | User info (name, email) |
-| `whoop-sync body` | Body measurements (height, weight, max HR) |
+| `whoop sleep` | Sleep stages, efficiency, respiratory rate |
+| `whoop recovery` | Recovery score, HRV, RHR, SpO2, skin temperature |
+| `whoop workout` | Workouts with strain, HR zones, calories |
+| `whoop cycle` | Daily physiological cycle (strain, calories) |
+| `whoop profile` | User info (name, email) |
+| `whoop body` | Body measurements (height, weight, max HR) |
 
 ### Analysis
 
@@ -68,11 +68,11 @@ Output is pretty-printed by default. Add `--json` for raw JSON.
 
 | Command | Description |
 | --- | --- |
-| `whoop-sync summary` | Multi-day averages: recovery, HRV, RHR, sleep, strain |
-| `whoop-sync summary --color` | Same with 🔴🟡🟢 color-coded status indicators |
-| `whoop-sync dashboard` | Full terminal dashboard with 7-day trends |
-| `whoop-sync trends` | Multi-day trend analysis with direction arrows ↑↓→ |
-| `whoop-sync insights` | Health recommendations based on your recent data |
+| `whoop summary` | Multi-day averages: recovery, HRV, RHR, sleep, strain |
+| `whoop summary --color` | Same with 🔴🟡🟢 color-coded status indicators |
+| `whoop dashboard` | Full terminal dashboard with 7-day trends |
+| `whoop trends` | Multi-day trend analysis with direction arrows ↑↓→ |
+| `whoop insights` | Health recommendations based on your recent data |
 
 ### Charts
 
@@ -80,11 +80,11 @@ Interactive HTML charts, opened in browser automatically. Use `-o file.html` to 
 
 | Command | Description |
 | --- | --- |
-| `whoop-sync chart sleep` | Sleep performance and stage breakdown |
-| `whoop-sync chart recovery` | Recovery score and HRV over time |
-| `whoop-sync chart strain` | Daily strain and calorie burn |
-| `whoop-sync chart hrv` | HRV trend |
-| `whoop-sync chart dashboard` | Combined overview (recommended) |
+| `whoop chart sleep` | Sleep performance and stage breakdown |
+| `whoop chart recovery` | Recovery score and HRV over time |
+| `whoop chart strain` | Daily strain and calorie burn |
+| `whoop chart hrv` | HRV trend |
+| `whoop chart dashboard` | Combined overview (recommended) |
 
 ### Lookups
 
@@ -92,11 +92,11 @@ Fetch a single record by ID. IDs come from collection endpoint responses or `das
 
 | Command | Description |
 | --- | --- |
-| `whoop-sync get sleep <uuid>` | Full detail for one sleep record (UUID string) |
-| `whoop-sync get workout <uuid>` | Full detail for one workout record (UUID string) |
-| `whoop-sync get cycle <id>` | Full detail for one cycle (integer ID) |
-| `whoop-sync cycle-sleep <cycleId>` | Sleep record linked to a given cycle |
-| `whoop-sync cycle-recovery <cycleId>` | Recovery record linked to a given cycle |
+| `whoop get sleep <uuid>` | Full detail for one sleep record (UUID string) |
+| `whoop get workout <uuid>` | Full detail for one workout record (UUID string) |
+| `whoop get cycle <id>` | Full detail for one cycle (integer ID) |
+| `whoop cycle-sleep <cycleId>` | Sleep record linked to a given cycle |
+| `whoop cycle-recovery <cycleId>` | Recovery record linked to a given cycle |
 
 ## Flags
 
@@ -138,11 +138,11 @@ Fetch a single record by ID. IDs come from collection endpoint responses or `das
 | `--profile` | Include profile |
 | `--body` | Include body measurements |
 
-Running `whoop-sync` with no arguments fetches all data types.
+Running `whoop` with no arguments fetches all data types.
 
 ## Example output
 
-`whoop-sync summary --color`:
+`whoop summary --color`:
 ```
 📊 7-Day Summary
 
@@ -153,7 +153,7 @@ Running `whoop-sync` with no arguments fetches all data types.
 🔥 Avg Strain:    6.8
 ```
 
-`whoop-sync dashboard`:
+`whoop dashboard`:
 ```
 📅 2026-02-17 | Ruben Khachaturov
 
@@ -178,7 +178,7 @@ Running `whoop-sync` with no arguments fetches all data types.
    Strain:   6.8 avg (range 4.1-16.4)
 ```
 
-`whoop-sync trends --days 7`:
+`whoop trends --days 7`:
 ```
 📊 7-Day Trends
 
@@ -190,7 +190,7 @@ Running `whoop-sync` with no arguments fetches all data types.
 🔥 Strain: 6.8 avg (4.1-16.4) ↓
 ```
 
-`whoop-sync insights`:
+`whoop insights`:
 ```
 💡 Insights & Recommendations
 
@@ -203,7 +203,7 @@ Running `whoop-sync` with no arguments fetches all data types.
    → Try to get to bed 30-60 min earlier for the next few days.
 ```
 
-`whoop-sync recovery` (default JSON):
+`whoop recovery` (default JSON):
 ```json
 {
   "cycle_id": 1317587415,
@@ -225,20 +225,20 @@ Running `whoop-sync` with no arguments fetches all data types.
 
 ## Token management
 
-`whoop-sync auth status` **does not refresh tokens** — it only reports expiry.
+`whoop auth status` **does not refresh tokens** — it only reports expiry.
 
 For cron jobs or automation:
 
 ```bash
 # Recommended pattern
-whoop-sync auth refresh   # ensure fresh token before fetching
-whoop-sync dashboard --json
+whoop auth refresh   # ensure fresh token before fetching
+whoop dashboard --json
 ```
 
 If refresh fails with an expired refresh token, re-authenticate interactively:
 
 ```bash
-whoop-sync auth login
+whoop auth login
 ```
 
 ## Exit codes
@@ -254,8 +254,8 @@ whoop-sync auth login
 ## Development
 
 ```bash
-git clone https://github.com/mrkhachaturov/whoop-sync.git
-cd whoop-sync
+git clone https://github.com/mrkhachaturov/whoop.git
+cd whoop
 npm install
 
 npm run dev -- dashboard    # run without building

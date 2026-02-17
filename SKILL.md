@@ -1,5 +1,5 @@
 ---
-name: whoop-sync
+name: whoop-up
 description: >
   WHOOP CLI for health data, trends, insights, dashboards, and interactive charts.
   Use when user asks about WHOOP data, health metrics, recovery, HRV,
@@ -12,19 +12,19 @@ description: >
   "health insights", "trend analysis", "visualize my health", "whoop chart".
 ---
 
-# whoop-sync
+# whoop-up
 
 Fetch, analyze, and visualize WHOOP health metrics via CLI: sleep, recovery, HRV, strain, workouts, and interactive charts.
 
-Install: `npm install -g whoop-sync`
+Install: `npm install -g whoop-up`
 
 ## Quick start
 
 ```bash
-whoop-sync summary --color                            # color-coded daily snapshot
-whoop-sync dashboard                                  # full dashboard + 7-day trends
-whoop-sync trends --days 14                           # 14-day trend analysis
-whoop-sync chart dashboard -n 30 -o /tmp/whoop.html  # interactive HTML chart
+whoop summary --color                            # color-coded daily snapshot
+whoop dashboard                                  # full dashboard + 7-day trends
+whoop trends --days 14                           # 14-day trend analysis
+whoop chart dashboard -n 30 -o /tmp/whoop.html  # interactive HTML chart
 ```
 
 ## Commands
@@ -70,7 +70,7 @@ Get types: `sleep` (UUID string) · `workout` (UUID string) · `cycle` (integer)
 - Data commands → JSON by default; add `--pretty` for formatted output
 - Analysis commands → pretty by default; add `--json` for raw data
 - WHOOP day boundary is **4:00 AM**, not midnight
-- Tokens stored at `~/.whoop-sync/tokens.json`, auto-refresh 15 min before expiry
+- Tokens stored at `~/.whoop-up/tokens.json`, auto-refresh 15 min before expiry
 - `trends --days` only accepts **7, 14, or 30**
 - `chart` commands open browser automatically; use `-o file.html` to save instead
 - `get sleep <id>` — id is a UUID string; `get cycle <id>` — id is an integer
@@ -80,18 +80,18 @@ Get types: `sleep` (UUID string) · `workout` (UUID string) · `cycle` (integer)
 
 | User asks | Command |
 | --- | --- |
-| "How did I sleep last night?" | `whoop-sync dashboard --json` |
-| "What's my recovery today?" | `whoop-sync summary --color` |
-| "Show me my health overview" | `whoop-sync dashboard` |
-| "How are my trends this week?" | `whoop-sync trends --days 7 --json` |
-| "Analyze last 30 days" | `whoop-sync trends --days 30 --json` |
-| "What are my health insights?" | `whoop-sync insights` |
-| "Show me a chart / visualize my health" | `whoop-sync chart dashboard -n 30 -o /tmp/whoop.html` |
-| "Show HRV chart" | `whoop-sync chart hrv -n 30 -o /tmp/whoop-hrv.html` |
-| "Is my HRV improving?" | `whoop-sync trends --days 14 --json` |
-| "How much did I train this week?" | `whoop-sync workout -n 7 --pretty` |
-| "What was my sleep on 2026-01-15?" | `whoop-sync sleep -d 2026-01-15 --pretty` |
-| "Show all data for last month" | `whoop-sync --sleep --recovery --cycle --workout -n 30 --pretty` |
+| "How did I sleep last night?" | `whoop dashboard --json` |
+| "What's my recovery today?" | `whoop summary --color` |
+| "Show me my health overview" | `whoop dashboard` |
+| "How are my trends this week?" | `whoop trends --days 7 --json` |
+| "Analyze last 30 days" | `whoop trends --days 30 --json` |
+| "What are my health insights?" | `whoop insights` |
+| "Show me a chart / visualize my health" | `whoop chart dashboard -n 30 -o /tmp/whoop.html` |
+| "Show HRV chart" | `whoop chart hrv -n 30 -o /tmp/whoop-hrv.html` |
+| "Is my HRV improving?" | `whoop trends --days 14 --json` |
+| "How much did I train this week?" | `whoop workout -n 7 --pretty` |
+| "What was my sleep on 2026-01-15?" | `whoop sleep -d 2026-01-15 --pretty` |
+| "Show all data for last month" | `whoop --sleep --recovery --cycle --workout -n 30 --pretty` |
 
 ## Key metrics
 
@@ -114,10 +114,10 @@ When the user asks about health, trends, or wants deeper interpretation, use `re
 - Red flags that suggest medical consultation
 
 ### Analysis workflow
-1. **Status** — `whoop-sync summary --color` (today's snapshot)
-2. **Trends** — `whoop-sync trends --days 14 --json` (direction of key metrics)
+1. **Status** — `whoop summary --color` (today's snapshot)
+2. **Trends** — `whoop trends --days 14 --json` (direction of key metrics)
 3. **Patterns** — correlate: late workouts → poor sleep, high strain → low HRV next day
-4. **Insights** — `whoop-sync insights` (automated recommendations)
+4. **Insights** — `whoop insights` (automated recommendations)
 5. **Flags** — RHR rising >5 bpm, HRV <80% of 7-day average, SpO2 <94%
 
 Always include: *"This is not medical advice."*
@@ -126,50 +126,50 @@ Always include: *"This is not medical advice."*
 
 **Best single command for LLM analysis:**
 ```bash
-whoop-sync dashboard --json
+whoop dashboard --json
 ```
 Most data-dense: today's full snapshot (profile + recovery + sleep + cycle + workout) plus 7-day arrays of recovery, sleep, and cycle history — all in one JSON blob.
 
 **Full daily picture (formatted for human reading):**
 ```bash
-whoop-sync dashboard        # today + 7-day terminal dashboard
-whoop-sync insights         # health recommendations
+whoop dashboard        # today + 7-day terminal dashboard
+whoop insights         # health recommendations
 ```
 
 **30-day deep dive (maximum historical context):**
 ```bash
-whoop-sync trends --days 30 --json
-whoop-sync sleep -n 30 --all --pretty
-whoop-sync recovery -n 30 --all --pretty
-whoop-sync workout -n 30 --all --pretty
+whoop trends --days 30 --json
+whoop sleep -n 30 --all --pretty
+whoop recovery -n 30 --all --pretty
+whoop workout -n 30 --all --pretty
 ```
 
 **Visual analysis (save charts to files):**
 ```bash
-whoop-sync chart dashboard -n 30 -o /tmp/whoop-dashboard.html
-whoop-sync chart hrv -n 90 -o /tmp/whoop-hrv.html
-whoop-sync chart sleep -n 30 -o /tmp/whoop-sleep.html
-whoop-sync chart recovery -n 30 -o /tmp/whoop-recovery.html
+whoop chart dashboard -n 30 -o /tmp/whoop-dashboard.html
+whoop chart hrv -n 90 -o /tmp/whoop-hrv.html
+whoop chart sleep -n 30 -o /tmp/whoop-sleep.html
+whoop chart recovery -n 30 -o /tmp/whoop-recovery.html
 ```
 
 **Drill into a specific record (use IDs from `dashboard --json` output):**
 ```bash
-whoop-sync get sleep <uuid>          # full detail for one sleep record
-whoop-sync get cycle <id>            # full detail for one day's cycle
-whoop-sync cycle-sleep <cycleId>     # sleep linked to that cycle
-whoop-sync cycle-recovery <cycleId>  # recovery linked to that cycle
+whoop get sleep <uuid>          # full detail for one sleep record
+whoop get cycle <id>            # full detail for one day's cycle
+whoop cycle-sleep <cycleId>     # sleep linked to that cycle
+whoop cycle-recovery <cycleId>  # recovery linked to that cycle
 ```
 
 **Recommended god mode workflow:**
-1. `whoop-sync dashboard --json` — current state + 7-day history
-2. `whoop-sync trends --days 30 --json` — 30-day trend context
-3. `whoop-sync --sleep --recovery --workout --cycle -n 30 --all` — raw data for all key metrics
+1. `whoop dashboard --json` — current state + 7-day history
+2. `whoop trends --days 30 --json` — 30-day trend context
+3. `whoop --sleep --recovery --workout --cycle -n 30 --all` — raw data for all key metrics
 4. Feed all JSON to LLM: correlate HRV↔sleep, recovery↔strain, sleep duration↔workout performance
-5. `whoop-sync chart dashboard -n 30 -o /tmp/whoop.html` — visual confirmation
+5. `whoop chart dashboard -n 30 -o /tmp/whoop.html` — visual confirmation
 
 ## Example output
 
-`whoop-sync summary --color`:
+`whoop summary --color`:
 ```
 📊 7-Day Summary
 
@@ -180,7 +180,7 @@ whoop-sync cycle-recovery <cycleId>  # recovery linked to that cycle
 🔥 Avg Strain:    6.8
 ```
 
-`whoop-sync dashboard`:
+`whoop dashboard`:
 ```
 📅 2026-02-17 | Ruben Khachaturov
 
@@ -205,7 +205,7 @@ whoop-sync cycle-recovery <cycleId>  # recovery linked to that cycle
    Strain:   6.8 avg (range 4.1-16.4)
 ```
 
-`whoop-sync trends --days 7`:
+`whoop trends --days 7`:
 ```
 📊 7-Day Trends
 
@@ -217,7 +217,7 @@ whoop-sync cycle-recovery <cycleId>  # recovery linked to that cycle
 🔥 Strain: 6.8 avg (4.1-16.4) ↓
 ```
 
-`whoop-sync insights`:
+`whoop insights`:
 ```
 💡 Insights & Recommendations
 

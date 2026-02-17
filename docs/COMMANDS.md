@@ -1,4 +1,4 @@
-# whoop-sync — Full Command Reference
+# whoop-up — Full Command Reference
 
 ← [Back to README](../README.md)
 
@@ -11,15 +11,15 @@
 OAuth 2.0 authorization code flow. Opens browser; paste the callback URL when prompted.
 
 ```bash
-whoop-sync auth login
+whoop auth login
 ```
 
 ### `auth logout`
 
-Revokes access on the WHOOP server, then clears `~/.whoop-sync/tokens.json`.
+Revokes access on the WHOOP server, then clears `~/.whoop-up/tokens.json`.
 
 ```bash
-whoop-sync auth logout
+whoop auth logout
 ```
 
 ### `auth status`
@@ -27,7 +27,7 @@ whoop-sync auth logout
 Reports token expiry without refreshing.
 
 ```bash
-whoop-sync auth status
+whoop auth status
 ```
 
 Output:
@@ -46,7 +46,7 @@ Output:
 Forces a token refresh using the stored refresh token.
 
 ```bash
-whoop-sync auth refresh
+whoop auth refresh
 ```
 
 ---
@@ -72,7 +72,7 @@ All data commands output JSON by default. Add `--pretty` for formatted output.
 Sleep stages, efficiency, respiratory rate, disturbances.
 
 ```bash
-whoop-sync sleep --days 7 --pretty
+whoop sleep --days 7 --pretty
 ```
 
 Output:
@@ -118,7 +118,7 @@ Output:
 Recovery score, HRV (rMSSD), resting heart rate, SpO2, skin temperature.
 
 ```bash
-whoop-sync recovery --days 1 --pretty
+whoop recovery --days 1 --pretty
 ```
 
 Output:
@@ -143,7 +143,7 @@ Output:
 
 Raw JSON (default):
 ```bash
-whoop-sync recovery --days 1
+whoop recovery --days 1
 ```
 
 ```json
@@ -170,7 +170,7 @@ whoop-sync recovery --days 1
 Workouts with sport name, strain, heart rate zones, calorie burn.
 
 ```bash
-whoop-sync workout --days 7 --pretty
+whoop workout --days 7 --pretty
 ```
 
 Output:
@@ -211,7 +211,7 @@ Output:
 Daily physiological cycle: strain score, calorie burn.
 
 ```bash
-whoop-sync cycle --days 7 --pretty
+whoop cycle --days 7 --pretty
 ```
 
 ### `profile`
@@ -219,7 +219,7 @@ whoop-sync cycle --days 7 --pretty
 User profile: name, email, user ID.
 
 ```bash
-whoop-sync profile
+whoop profile
 ```
 
 ### `body`
@@ -227,7 +227,7 @@ whoop-sync profile
 Body measurements: height, weight, max heart rate.
 
 ```bash
-whoop-sync body
+whoop body
 ```
 
 ---
@@ -241,7 +241,7 @@ Analysis commands output pretty-printed text by default. Add `--json` for raw JS
 Multi-day averages: recovery, HRV, RHR, sleep performance, sleep hours, strain.
 
 ```bash
-whoop-sync summary [-n days]
+whoop summary [-n days]
 ```
 
 | Flag | Description |
@@ -250,7 +250,7 @@ whoop-sync summary [-n days]
 | `-c, --color` | Add 🔴🟡🟢 color-coded indicators |
 | `--json` | Raw JSON output |
 
-`whoop-sync summary --color`:
+`whoop summary --color`:
 ```
 📊 7-Day Summary
 
@@ -266,7 +266,7 @@ whoop-sync summary [-n days]
 Full terminal dashboard: today's recovery, sleep, strain + 7-day trend lines.
 
 ```bash
-whoop-sync dashboard [--json]
+whoop dashboard [--json]
 ```
 
 Output:
@@ -299,12 +299,12 @@ Output:
 Multi-day trend analysis with averages, ranges, and direction arrows ↑↓→.
 
 ```bash
-whoop-sync trends [-n 7|14|30] [--json]
+whoop trends [-n 7|14|30] [--json]
 ```
 
 `--days` only accepts **7, 14, or 30**.
 
-`whoop-sync trends --days 7`:
+`whoop trends --days 7`:
 ```
 📊 7-Day Trends
 
@@ -321,7 +321,7 @@ whoop-sync trends [-n 7|14|30] [--json]
 Health recommendations based on recent recovery, sleep, and strain patterns.
 
 ```bash
-whoop-sync insights [-n days] [--json]
+whoop insights [-n days] [--json]
 ```
 
 Output:
@@ -344,7 +344,7 @@ Output:
 Interactive HTML charts using ApexCharts. Opens in browser by default.
 
 ```bash
-whoop-sync chart <type> [-n days] [-o output.html]
+whoop chart <type> [-n days] [-o output.html]
 ```
 
 | Type | Description |
@@ -362,8 +362,8 @@ whoop-sync chart <type> [-n days] [-o output.html]
 
 Examples:
 ```bash
-whoop-sync chart dashboard -n 30 -o /tmp/whoop.html
-whoop-sync chart hrv -n 90 -o /tmp/whoop-hrv.html
+whoop chart dashboard -n 30 -o /tmp/whoop.html
+whoop chart hrv -n 90 -o /tmp/whoop-hrv.html
 ```
 
 ---
@@ -377,7 +377,7 @@ Fetch a single record by ID. Get IDs from collection responses or `dashboard --j
 Full detail for one sleep record. ID is a UUID string.
 
 ```bash
-whoop-sync get sleep ecfc6a15-4661-442f-a9a4-f160dd7afae8
+whoop get sleep ecfc6a15-4661-442f-a9a4-f160dd7afae8
 ```
 
 ### `get workout <uuid>`
@@ -385,7 +385,7 @@ whoop-sync get sleep ecfc6a15-4661-442f-a9a4-f160dd7afae8
 Full detail for one workout. ID is a UUID string.
 
 ```bash
-whoop-sync get workout <uuid>
+whoop get workout <uuid>
 ```
 
 ### `get cycle <id>`
@@ -393,7 +393,7 @@ whoop-sync get workout <uuid>
 Full detail for one cycle. ID is an integer.
 
 ```bash
-whoop-sync get cycle 12345678
+whoop get cycle 12345678
 ```
 
 ### `cycle-sleep <cycleId>`
@@ -401,7 +401,7 @@ whoop-sync get cycle 12345678
 Sleep record linked to a specific cycle (by integer cycle ID).
 
 ```bash
-whoop-sync cycle-sleep 12345678
+whoop cycle-sleep 12345678
 ```
 
 ### `cycle-recovery <cycleId>`
@@ -409,7 +409,7 @@ whoop-sync cycle-sleep 12345678
 Recovery record linked to a specific cycle (by integer cycle ID).
 
 ```bash
-whoop-sync cycle-recovery 12345678
+whoop cycle-recovery 12345678
 ```
 
 ---
@@ -419,10 +419,10 @@ whoop-sync cycle-recovery 12345678
 Combine data types in a single fetch:
 
 ```bash
-whoop-sync --sleep --recovery --workout --cycle --profile --body
+whoop --sleep --recovery --workout --cycle --profile --body
 ```
 
-Running `whoop-sync` with no arguments fetches all data types.
+Running `whoop` with no arguments fetches all data types.
 
 ---
 

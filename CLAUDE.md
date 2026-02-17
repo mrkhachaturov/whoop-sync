@@ -1,8 +1,8 @@
-# whoop-sync — Claude Code Guide
+# whoop-up — Claude Code Guide
 
 ## Project Overview
 
-`whoop-sync` is a TypeScript CLI tool that fetches, analyzes, and visualizes health data from the WHOOP API v2. It is published to npm and installed globally: `npm install -g whoop-sync`.
+`whoop-up` is a TypeScript CLI tool that fetches, analyzes, and visualizes health data from the WHOOP API v2. It is published to npm and installed globally: `npm install -g whoop-up`.
 
 **Origin:** Built on top of [whoop-cli](https://github.com/xonika9/whoop-cli) by xonika9. Extended with:
 - Trend analysis, health insights, full dashboard, interactive HTML charts
@@ -21,7 +21,7 @@ src/
 │   └── client.ts         All API functions + retry logic + pagination
 ├── auth/
 │   ├── oauth.ts          OAuth 2.0 login/logout/status/refresh
-│   └── tokens.ts         Token storage at ~/.whoop-sync/tokens.json
+│   └── tokens.ts         Token storage at ~/.whoop-up/tokens.json
 ├── charts/
 │   └── generator.ts      HTML chart generation (ApexCharts, opens in browser)
 ├── types/
@@ -34,7 +34,7 @@ src/
 ```
 
 **Build output:** `dist/` (compiled JS + `.d.ts` + sourcemaps)
-**Binary:** `dist/index.js` — wired to `whoop-sync` via `package.json` `bin` field
+**Binary:** `dist/index.js` — wired to `whoop` via `package.json` `bin` field
 
 ---
 
@@ -136,7 +136,7 @@ Unlike the original `whoopskill_v2`, all data commands default to `--days 7`. Th
 ### WHOOP day boundary = 4am
 WHOOP considers a new "day" to start at 4:00 AM. `getWhoopDay()` in `date.ts` handles this — calls before 4am still reference the previous calendar day.
 
-### Token storage at `~/.whoop-sync/tokens.json`
+### Token storage at `~/.whoop-up/tokens.json`
 Permissions: directory `0700`, file `0600`. Tokens auto-refresh 15 minutes before expiry (`REFRESH_BUFFER_SECONDS = 900`).
 
 ### Logout revokes server-side
@@ -154,38 +154,38 @@ Permissions: directory `0700`, file `0600`. Tokens auto-refresh 15 minutes befor
 
 ```bash
 # Auth
-whoop-sync auth login
-whoop-sync auth logout        # revokes on WHOOP server + clears local tokens
-whoop-sync auth status
-whoop-sync auth refresh
+whoop auth login
+whoop auth logout        # revokes on WHOOP server + clears local tokens
+whoop auth status
+whoop auth refresh
 
 # Data collection (all support: -n/--days, -s/--start, -e/--end, -d/--date, -l/--limit, -a/--all, -p/--pretty)
-whoop-sync sleep [options]
-whoop-sync recovery [options]
-whoop-sync workout [options]
-whoop-sync cycle [options]
-whoop-sync profile
-whoop-sync body
+whoop sleep [options]
+whoop recovery [options]
+whoop workout [options]
+whoop cycle [options]
+whoop profile
+whoop body
 
 # Multi-day summary with averages (HRV, RHR, sleep%, sleep hours, strain)
-whoop-sync summary [-n days] [-s start] [-e end] [-c/--color] [--json]
+whoop summary [-n days] [-s start] [-e end] [-c/--color] [--json]
 
 # Trend analysis — days must be 7, 14, or 30
-whoop-sync trends [-n 7|14|30] [--json]
+whoop trends [-n 7|14|30] [--json]
 
 # AI-style insights
-whoop-sync insights [-n days] [--json]
+whoop insights [-n days] [--json]
 
 # Full terminal dashboard with today's data and 7-day trends
-whoop-sync dashboard [--json]
+whoop dashboard [--json]
 
 # HTML charts — opens in browser
-whoop-sync chart <sleep|recovery|strain|hrv|dashboard> [-n days] [-o output.html]
+whoop chart <sleep|recovery|strain|hrv|dashboard> [-n days] [-o output.html]
 
 # By-ID lookups
-whoop-sync get <sleep|workout|cycle> <id>
-whoop-sync cycle-sleep <cycleId>       # sleep linked to a cycle
-whoop-sync cycle-recovery <cycleId>    # recovery linked to a cycle
+whoop get <sleep|workout|cycle> <id>
+whoop cycle-sleep <cycleId>       # sleep linked to a cycle
+whoop cycle-recovery <cycleId>    # recovery linked to a cycle
 ```
 
 ---
@@ -204,7 +204,7 @@ npm run build
 
 # Test locally as installed CLI
 npm install -g .
-whoop-sync --help
+whoop --help
 
 # One-shot run (compiled)
 node dist/index.js summary --color
@@ -231,7 +231,7 @@ npm login
 npm publish --access public
 
 # Users install with:
-npm install -g whoop-sync
+npm install -g whoop-up
 ```
 
 Version is set in `package.json`. Bump it before each publish.
