@@ -4,9 +4,9 @@
 
 `whoop-sync` is a TypeScript CLI tool that fetches, analyzes, and visualizes health data from the WHOOP API v2. It is published to npm and installed globally: `npm install -g whoop-sync`.
 
-**Origin:** Combined the best of two prior implementations:
-- `whoopskill_v2` (TypeScript CLI, trends/insights, color output)
-- `whoop-health-analysis-1.1.0` (Python skill, retry logic, `--days` shorthand, summary averages, HTML charts)
+**Origin:** Built on top of [whoop-cli](https://github.com/xonika9/whoop-cli) by xonika9. Extended with:
+- Trend analysis, health insights, full dashboard, interactive HTML charts
+- Retry logic, `--days` shorthand, summary averages, per-minute rate limit awareness
 
 ---
 

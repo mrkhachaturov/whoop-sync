@@ -31,8 +31,16 @@
     "trends",
     "charts"
   ],
-  "author": "Ruben Khachaturov",
+  "author": "Ruben Khachaturov <mr.kha4a2rov@protonmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrkhachaturov/whoop-sync.git"
+  },
+  "homepage": "https://github.com/mrkhachaturov/whoop-sync#readme",
+  "bugs": {
+    "url": "https://github.com/mrkhachaturov/whoop-sync/issues"
+  },
   "dependencies": {
     "commander": "^12.1.0",
     "dotenv": "^16.4.0",
