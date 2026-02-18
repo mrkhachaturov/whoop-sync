@@ -27,6 +27,7 @@ whoop chart dashboard -n 30 -o /tmp/whoop.html  # interactive HTML chart
 ```env
 WHOOP_CLIENT_ID=your_client_id
 WHOOP_CLIENT_SECRET=your_client_secret
+# Use WHOOP_CLIENT_CRED as alias if your environment blocks keys ending in _SECRET
 WHOOP_REDIRECT_URI=https://your-redirect-uri.com/callback
 ```
 

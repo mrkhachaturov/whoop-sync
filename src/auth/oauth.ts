@@ -12,7 +12,7 @@ const SCOPES = 'read:profile read:body_measurement read:workout read:recovery re
 
 function getCredentials(): { clientId: string; clientSecret: string; redirectUri: string } {
   const clientId = process.env.WHOOP_CLIENT_ID;
-  const clientSecret = process.env.WHOOP_CLIENT_SECRET;
+  const clientSecret = process.env.WHOOP_CLIENT_SECRET ?? process.env.WHOOP_CLIENT_CRED;
   const redirectUri = process.env.WHOOP_REDIRECT_URI;
 
   if (!clientId || !clientSecret || !redirectUri) {

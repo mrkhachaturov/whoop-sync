@@ -57,7 +57,7 @@ export function isTokenExpired(tokens: TokenData): boolean {
 
 export async function refreshAccessToken(tokens: TokenData): Promise<TokenData> {
   const clientId = process.env.WHOOP_CLIENT_ID;
-  const clientSecret = process.env.WHOOP_CLIENT_SECRET;
+  const clientSecret = process.env.WHOOP_CLIENT_SECRET ?? process.env.WHOOP_CLIENT_CRED;
 
   if (!clientId || !clientSecret) {
     throw new WhoopError('Missing WHOOP_CLIENT_ID or WHOOP_CLIENT_SECRET', ExitCode.AUTH_ERROR);
